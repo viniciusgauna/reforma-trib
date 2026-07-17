@@ -1123,6 +1123,72 @@
     "dataAtualizacao": "2026-04-15"
   },
   {
+    "codigo": "220001",
+    "descricao": "Incorporação imobiliária submetida ao regime especial de tributação",
+    "tipoAliquota": "Fixa",
+    "nomenclatura": "NBS ou NCM",
+    "descricaoTratamentoTributario": "Alíquota fixa",
+    "incompativelComSuspensao": false,
+    "exigeGrupoDesoneracao": false,
+    "possuiPercentualReducao": false,
+    "indicaApropriacaoCreditoAdquirenteCbs": true,
+    "indicaApropriacaoCreditoAdquirenteIbs": true,
+    "indicaCreditoPresumidoFornecedor": false,
+    "indicaCreditoPresumidoAdquirente": false,
+    "creditoOperacaoAntecedente": "Manutenção",
+    "percentualReducaoCbs": 0,
+    "percentualReducaoIbsUf": 0,
+    "percentualReducaoIbsMun": 0,
+    "tiposDfeClassificacao": [
+      {"sigla": "NFe ABI", "descricao": "Nota Fiscal Eletrônica de Alienação de Bens Imóveis"}
+    ],
+    "dataAtualizacao": "2026-06-22"
+  },
+  {
+    "codigo": "220002",
+    "descricao": "Incorporação imobiliária submetida ao regime especial de tributação",
+    "tipoAliquota": "Fixa",
+    "nomenclatura": "NBS ou NCM",
+    "descricaoTratamentoTributario": "Alíquota fixa",
+    "incompativelComSuspensao": false,
+    "exigeGrupoDesoneracao": false,
+    "possuiPercentualReducao": false,
+    "indicaApropriacaoCreditoAdquirenteCbs": true,
+    "indicaApropriacaoCreditoAdquirenteIbs": true,
+    "indicaCreditoPresumidoFornecedor": false,
+    "indicaCreditoPresumidoAdquirente": false,
+    "creditoOperacaoAntecedente": "Manutenção",
+    "percentualReducaoCbs": 0,
+    "percentualReducaoIbsUf": 0,
+    "percentualReducaoIbsMun": 0,
+    "tiposDfeClassificacao": [
+      {"sigla": "NFe ABI", "descricao": "Nota Fiscal Eletrônica de Alienação de Bens Imóveis"}
+    ],
+    "dataAtualizacao": "2026-06-22"
+  },
+  {
+    "codigo": "220003",
+    "descricao": "Alienação de imóvel decorrente de parcelamento do solo",
+    "tipoAliquota": "Fixa",
+    "nomenclatura": "NBS ou NCM",
+    "descricaoTratamentoTributario": "Alíquota fixa",
+    "incompativelComSuspensao": false,
+    "exigeGrupoDesoneracao": false,
+    "possuiPercentualReducao": false,
+    "indicaApropriacaoCreditoAdquirenteCbs": true,
+    "indicaApropriacaoCreditoAdquirenteIbs": true,
+    "indicaCreditoPresumidoFornecedor": false,
+    "indicaCreditoPresumidoAdquirente": false,
+    "creditoOperacaoAntecedente": "Manutenção",
+    "percentualReducaoCbs": 0,
+    "percentualReducaoIbsUf": 0,
+    "percentualReducaoIbsMun": 0,
+    "tiposDfeClassificacao": [
+      {"sigla": "NFe ABI", "descricao": "Nota Fiscal Eletrônica de Alienação de Bens Imóveis"}
+    ],
+    "dataAtualizacao": "2026-06-22"
+  },
+  {
     "codigo": "221001",
     "descricao": "LocaÃ§Ã£o, cessÃ£o onerosa ou arrendamento de bem imÃ³vel com alÃ­quota sobre a receita bruta",
     "tipoAliquota": "Fixa", "nomenclatura": "NBS ou NCM", "descricaoTratamentoTributario": "AlÃ­quota fixa proporcional",

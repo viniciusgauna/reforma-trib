@@ -4,7 +4,6 @@ Fontes: Anexo VI (NFS-e Nacional / RTC), Anexo VII (indOp) e Anexo VIII
 (correlação Item LC116 x NBS x indOp x cClassTrib) do RTC IBS/CBS.
 """
 
-import unicodedata
 from pathlib import Path
 
 import pandas as pd
@@ -16,6 +15,8 @@ from data import (
     load_indop,
     load_tabela_geral,
 )
+from logic import contains as _contains
+from logic import resumo_reducao as _resumo_reducao
 
 st.set_page_config(
     page_title="Classificação Tributária IBS/CBS",
@@ -35,18 +36,6 @@ geral = load_tabela_geral()
 indop = load_indop()
 issqn = load_incidencia_issqn()
 cclasstrib_detalhe = load_classificacoes_tributarias()
-
-
-def _normalizar(texto: str) -> str:
-    """Remove acentos (NFKD + descarte de marcas combinantes) para permitir
-    busca tolerante: "saude" deve encontrar "saúde"."""
-    return unicodedata.normalize("NFKD", texto).encode("ascii", "ignore").decode("ascii")
-
-
-def _contains(series: pd.Series, query: str) -> pd.Series:
-    query_normalizada = _normalizar(query)
-    series_normalizada = series.fillna("").map(_normalizar)
-    return series_normalizada.str.contains(query_normalizada, case=False, na=False, regex=False)
 
 
 COLUMN_LABELS = {
@@ -105,21 +94,6 @@ def show(df: pd.DataFrame, column_config: dict | None = None) -> None:
         width="stretch",
         column_config=column_config,
     )
-
-
-def _resumo_reducao(row: pd.Series) -> str:
-    """Resume as 3 colunas de percentual de redução em um único texto,
-    para caber numa tabela estreita em vez de 3 colunas separadas."""
-    if not row["possui_reducao"]:
-        return "—"
-    cbs, ibs_uf, ibs_mun = (
-        row["percentual_reducao_cbs"],
-        row["percentual_reducao_ibs_uf"],
-        row["percentual_reducao_ibs_mun"],
-    )
-    if cbs == ibs_uf == ibs_mun:
-        return f"{cbs:.0f}%"
-    return f"CBS {cbs:.0f}% · IBS-UF {ibs_uf:.0f}% · IBS-Mun {ibs_mun:.0f}%"
 
 
 def show_cclasstrib_resumo(df: pd.DataFrame) -> None:
