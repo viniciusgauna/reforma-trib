@@ -18,6 +18,13 @@ html, body, [data-testid="stAppViewContainer"], [data-testid="stApp"], * {
     font-family: var(--pl-font) !important;
 }
 
+/* Tamanho base maior (o padrão do Streamlit deixa rótulo/legenda/texto em
+   14px, muito menor que os títulos — aqui tudo fica numa escala maior e
+   mais uniforme). */
+html {
+    font-size: 18px;
+}
+
 /* Ícones do Streamlit (setas de expander/select etc.) usam uma fonte de
    glifos (ligature font); sem esta exceção, a regra genérica acima faz o
    nome do ícone (ex.: "keyboard_arrow_right") aparecer como texto literal
@@ -40,6 +47,24 @@ h1, h2, h3, h4, h5, h6 {
 h1 { font-size: 2.4rem !important; }
 h2 { font-size: 1.85rem !important; }
 h3 { font-size: 1.6rem !important; }
+
+/* Texto "normal" do Streamlit (rótulos, legendas, parágrafos, tabelas,
+   expanders) vem em 14px por padrão — bem menor que os títulos. Aqui fica
+   todo no mesmo tamanho de leitura confortável. */
+[data-testid="stCaptionContainer"],
+[data-testid="stCaptionContainer"] p,
+[data-testid="stWidgetLabel"] p,
+[data-testid="stMarkdownContainer"] p,
+[data-testid="stMarkdownContainer"] li,
+[data-testid="stAlert"] p,
+[data-testid="stExpander"] summary,
+[data-testid="stExpander"] summary p,
+[data-testid="stDataFrame"],
+[data-testid="stTabs"] button p,
+[data-testid="stTextInput"] input,
+[data-testid="stSelectbox"] [data-baseweb="select"] {
+    font-size: 1.05rem !important;
+}
 
 a, [data-testid="stMarkdownContainer"] a {
     color: var(--pl-blue) !important;

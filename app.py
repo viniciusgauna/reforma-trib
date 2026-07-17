@@ -188,7 +188,6 @@ def _detalhe_issqn(linha: pd.Series) -> None:
     st.write(f"**Obrigatório: Informações Complementares?** {linha['obrigatorio_infocomplem']}")
 
 
-st.subheader("Qual serviço você presta?")
 query = st.text_input(
     "Descreva o serviço ou informe o código do item LC116 (ex.: 01.01)",
     key="query_servico",
