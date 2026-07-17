@@ -1,0 +1,117 @@
+/* Reskin inspirado no PlainCSS (github.com/ilyadzh/plain-css): paleta,
+   raio de borda e proporções do framework, adaptados aos componentes do
+   Streamlit via data-testid. Fonte trocada para Times New Roman a pedido.
+*/
+
+:root {
+    --pl-green: #27ae60;
+    --pl-blue: #3498db;
+    --pl-yellow: #f7af15;
+    --pl-red: #e74c3c;
+    --pl-gray: #747681;
+    --pl-black: #333333;
+    --pl-border: #dcdde1;
+    --pl-font: "Times New Roman", Times, Georgia, serif;
+}
+
+html, body, [data-testid="stAppViewContainer"], [data-testid="stApp"], * {
+    font-family: var(--pl-font) !important;
+}
+
+/* Ícones do Streamlit (setas de expander/select etc.) usam uma fonte de
+   glifos (ligature font); sem esta exceção, a regra genérica acima faz o
+   nome do ícone (ex.: "keyboard_arrow_right") aparecer como texto literal
+   em vez do símbolo. */
+[data-testid="stIconMaterial"] {
+    font-family: "Material Symbols Rounded" !important;
+}
+
+body, p, li, span, label, div {
+    color: var(--pl-black);
+    line-height: 1.5;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: normal !important;
+    line-height: 1.2 !important;
+    color: var(--pl-black) !important;
+}
+
+h1 { font-size: 2.4rem !important; }
+h2 { font-size: 1.85rem !important; }
+h3 { font-size: 1.6rem !important; }
+
+a, [data-testid="stMarkdownContainer"] a {
+    color: var(--pl-blue) !important;
+}
+
+/* Campos de texto e select: bordas suaves, raio de 4px, foco em verde */
+[data-testid="stTextInput"] input,
+[data-testid="stNumberInput"] input,
+[data-testid="stTextArea"] textarea,
+[data-testid="stSelectbox"] [data-baseweb="select"] > div {
+    border: 1px solid var(--pl-border) !important;
+    border-radius: 4px !important;
+    box-shadow: none !important;
+}
+
+[data-testid="stTextInput"] input:focus,
+[data-testid="stNumberInput"] input:focus,
+[data-testid="stTextArea"] textarea:focus {
+    border: 1px solid var(--pl-green) !important;
+}
+
+/* Botões: contorno verde, preenche ao passar o mouse (padrão do PlainCSS) */
+.stButton > button,
+.stDownloadButton > button,
+[data-testid="stBaseButton-secondary"],
+[data-testid="stBaseButton-primary"] {
+    background: transparent !important;
+    color: var(--pl-green) !important;
+    border: 1px solid var(--pl-green) !important;
+    border-radius: 4px !important;
+    padding: 10px 18px !important;
+    box-shadow: none !important;
+    transition: background 0.15s ease, color 0.15s ease;
+}
+
+.stButton > button:hover,
+[data-testid="stBaseButton-secondary"]:hover {
+    background: var(--pl-green) !important;
+    color: #ffffff !important;
+}
+
+/* Abas: sublinhado verde no lugar do vermelho padrão do Streamlit */
+[data-testid="stTabs"] [data-baseweb="tab-list"] {
+    border-bottom: 1px solid var(--pl-border);
+}
+
+[data-testid="stTabs"] button[aria-selected="true"] {
+    color: var(--pl-green) !important;
+}
+
+[data-testid="stTabs"] [data-baseweb="tab-highlight"] {
+    background-color: var(--pl-green) !important;
+}
+
+/* Expander: cantos levemente arredondados, borda discreta */
+[data-testid="stExpander"] {
+    border: 1px solid var(--pl-border) !important;
+    border-radius: 4px !important;
+}
+
+/* Tabelas: cabeçalho neutro, borda fina consistente com o resto */
+[data-testid="stDataFrame"] {
+    border: 1px solid var(--pl-border) !important;
+    border-radius: 4px !important;
+}
+
+/* Caixas com borda (st.container(border=True)) */
+[data-testid="stVerticalBlockBorderWrapper"] {
+    border-radius: 4px !important;
+}
+
+/* Alertas (st.info etc.) com o mesmo raio de borda */
+[data-testid="stAlert"] {
+    border-radius: 4px !important;
+}
