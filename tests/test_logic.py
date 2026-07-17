@@ -33,6 +33,30 @@ def test_contains_trata_valores_nulos_sem_erro():
     assert resultado.tolist() == [True, False, False]
 
 
+def test_contains_nao_quebra_com_entrada_gigante():
+    # Regressao: acima de ~500 mil caracteres o pandas/pyarrow lanca
+    # "ArrowInvalid: pattern too large" mesmo com regex=False, porque a
+    # comparacao sem diferenciar maiusculas/minusculas usa regex por baixo
+    # dos panos. contains() deve truncar a busca antes de chegar la.
+    serie = pd.Series(["saúde", "outro serviço qualquer"])
+    resultado = contains(serie, "a" * 1_000_000)
+    assert resultado.tolist() == [False, False]
+
+
+def test_contains_com_payloads_maliciosos_nao_quebra():
+    serie = pd.Series(["saúde", "<script>alert(1)</script>", "normal"])
+    payloads = [
+        "<script>alert(1)</script>",
+        "' OR '1'='1",
+        "../../../etc/passwd",
+        ".*+?^${}()|[]\\",
+        "(a+)+" + "a" * 40 + "!",
+        "\x00\x01\x02",
+    ]
+    for payload in payloads:
+        contains(serie, payload)  # nao deve lancar excecao
+
+
 def test_resumo_reducao_sem_reducao():
     linha = pd.Series({"possui_reducao": False})
     assert resumo_reducao(linha) == "—"

@@ -193,6 +193,7 @@ query = st.text_input(
     "Descreva o serviço ou informe o código do item LC116 (ex.: 01.01)",
     key="query_servico",
     placeholder="Ex.: análise de sistemas, ou 01.01",
+    max_chars=200,
 )
 
 if not query:
@@ -267,13 +268,13 @@ with busca_avancada:
         "Buscar por NBS",
         "Consultar indOp",
         "Consultar cClassTrib",
-        "Incidência do ISSQN (Anexo VI)",
+        "Incidência do ISSQN",
     ])
 
 with tab_nbs:
     st.subheader("Buscar por código ou descrição NBS")
     query_nbs = st.text_input(
-        "Código NBS (ex.: 1.1502.10.00) ou palavra-chave", key="query_nbs"
+        "Código NBS (ex.: 1.1502.10.00) ou palavra-chave", key="query_nbs", max_chars=200
     )
     if query_nbs:
         mask = _contains(geral["nbs"], query_nbs) | _contains(
@@ -298,7 +299,7 @@ with tab_nbs:
 with tab_indop:
     st.subheader("Tabela de indicadores de operação (Anexo VII)")
     query_indop = st.text_input(
-        "Código indOp ou palavra-chave", key="query_indop"
+        "Código indOp ou palavra-chave", key="query_indop", max_chars=200
     )
     if query_indop:
         mask = (
@@ -327,6 +328,7 @@ with tab_cclasstrib:
     query_cclasstrib = st.text_input(
         "Código cClassTrib (ex.: 000001), código CST (ex.: 200) ou palavra-chave na descrição",
         key="query_cclasstrib",
+        max_chars=200,
     )
     if query_cclasstrib:
         mask_detalhe = (
@@ -383,6 +385,7 @@ with tab_issqn:
     query_issqn = st.text_input(
         "Código de tributação nacional (ex.: 10101) ou palavra-chave",
         key="query_issqn",
+        max_chars=200,
     )
     if query_issqn:
         mask = _contains(

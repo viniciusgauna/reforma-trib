@@ -2,3 +2,12 @@
 base = "light"
 backgroundColor = "#ffffff"
 secondaryBackgroundColor = "#f0f2f6"
+
+[client]
+# Nao mostra stacktrace/caminhos internos ao publico se algo quebrar;
+# o desenvolvedor ainda ve o erro completo nos logs do Streamlit Cloud.
+showErrorDetails = "none"
+# Esconde a barra padrao do Streamlit (Deploy, menu "Rerun/Clear cache/...").
+# Sem isso, as primeiras paradas do Tab (navegacao por teclado) caem nesse
+# menu em vez do conteudo da pagina.
+toolbarMode = "minimal"

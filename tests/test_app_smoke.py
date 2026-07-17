@@ -60,3 +60,34 @@ def test_busca_por_issqn():
     at = _novo_app()
     at.text_input(key="query_issqn").input("101").run()
     assert not at.exception
+
+
+# --- Testes adversariais (bug/seguranca) --------------------------------
+
+CAMPOS_DE_BUSCA = [
+    "query_servico", "query_nbs", "query_indop", "query_cclasstrib", "query_issqn",
+]
+
+PAYLOADS_MALICIOSOS = [
+    "<script>alert(1)</script>",
+    "<img src=x onerror=alert(1)>",
+    "' OR '1'='1'; DROP TABLE users;--",
+    "../../../../etc/passwd",
+    "a" * 1_000_000,  # gatilho do bug de "pattern too large" (ja corrigido)
+    "(a+)+" + "a" * 50 + "!",  # tentativa classica de ReDoS
+    "{{7*7}}${7*7}<%= 7*7 %>",  # tentativa de template injection
+    "saude\x00.txt",
+]
+
+
+def test_campos_de_busca_resistem_a_payloads_maliciosos():
+    for campo in CAMPOS_DE_BUSCA:
+        for payload in PAYLOADS_MALICIOSOS:
+            at = _novo_app()
+            at.text_input(key=campo).input(payload).run()
+            assert not at.exception, f"campo={campo} payload={payload[:50]!r} causou excecao"
+            # o payload nunca deve ser refletido sem escape no HTML renderizado
+            for m in at.markdown:
+                assert payload not in str(m.value), (
+                    f"payload refletido sem escape: campo={campo} payload={payload[:50]!r}"
+                )
