@@ -39,48 +39,48 @@ cclasstrib_detalhe = load_classificacoes_tributarias()
 
 
 COLUMN_LABELS = {
-    "item_lc116": "Item LC116",
+    "item_lc116": "Item da LC 116",
     "descricao_item": "Descrição do Item",
     "nbs": "NBS",
     "descricao_nbs": "Descrição NBS",
-    "ps_onerosa": "PS Onerosa?",
-    "adq_exterior": "Adq. Exterior?",
-    "indop": "indOp",
-    "local_incidencia_ibs": "Local de Incidência (IBS)",
+    "ps_onerosa": "Prestação de Serviço Onerosa?",
+    "adq_exterior": "Aquisição do Exterior?",
+    "indop": "Indicador de Operação (indOp)",
+    "local_incidencia_ibs": "Local de Incidência do IBS",
     "cclasstrib": "cClassTrib",
-    "nome_cclasstrib": "Nome cClassTrib",
+    "nome_cclasstrib": "Nome do cClassTrib",
     "tipo_operacao": "Tipo de Operação",
     "caracteristica_fornecimento": "Característica do Fornecimento",
-    "local_fornecimento_dfe": "Local do Fornecimento (DFe)",
+    "local_fornecimento_dfe": "Local do Fornecimento no Documento Fiscal",
     "dispositivo_legal": "Dispositivo Legal",
     "observacao": "Observação",
-    "ind_nfe": "indNFe",
-    "ind_nfse": "indNFSe",
+    "ind_nfe": "Indicador de Nota Fiscal Eletrônica (NFe)",
+    "ind_nfse": "Indicador de Nota Fiscal de Serviços Eletrônica (NFSe)",
     "codigo_tributacao_nacional": "Código de Tributação Nacional",
     "descricao_servico": "Descrição do Serviço",
-    "incidencia_ep": "Incidência EP",
-    "incidencia_lp": "Incidência LP",
-    "incidencia_et": "Incidência ET",
-    "incidencia_edemit": "Incidência EDEmit",
-    "obrigatorio_obra_atvevento": "Obrig. Obra/AtvEvento",
-    "obrigatorio_infocomplem": "Obrig. InfoComplem",
+    "incidencia_ep": "Estabelecimento do Prestador",
+    "incidencia_lp": "Local da Prestação",
+    "incidencia_et": "Estabelecimento do Tomador",
+    "incidencia_edemit": "Estabelecimento do Emitente",
+    "obrigatorio_obra_atvevento": "Obrigatório: Grupo Obra/Atividade de Evento?",
+    "obrigatorio_infocomplem": "Obrigatório: Informações Complementares?",
     "codigo": "cClassTrib",
-    "cst": "CST",
-    "cst_descricao": "Descrição do CST",
+    "cst": "Código de Situação Tributária (CST)",
+    "cst_descricao": "Descrição da Situação Tributária",
     "tipo_aliquota": "Tipo de Alíquota",
     "tratamento_tributario": "Tratamento Tributário",
-    "percentual_reducao_cbs": "Redução CBS (%)",
-    "percentual_reducao_ibs_uf": "Redução IBS-UF (%)",
-    "percentual_reducao_ibs_mun": "Redução IBS-Mun (%)",
+    "percentual_reducao_cbs": "Redução de CBS (%)",
+    "percentual_reducao_ibs_uf": "Redução de IBS Estadual (%)",
+    "percentual_reducao_ibs_mun": "Redução de IBS Municipal (%)",
     "possui_reducao": "Possui Redução?",
-    "incompativel_suspensao": "Incompat. c/ Suspensão?",
-    "exige_grupo_desoneracao": "Exige Grupo Desoneração?",
-    "credito_cbs_adquirente": "Crédito CBS (Adquirente)?",
-    "credito_ibs_adquirente": "Crédito IBS (Adquirente)?",
-    "credito_presumido_fornecedor": "Créd. Presumido (Fornecedor)?",
-    "credito_presumido_adquirente": "Créd. Presumido (Adquirente)?",
-    "credito_operacao_antecedente": "Crédito Operação Antecedente",
-    "dfes_relacionados": "DFes Relacionados",
+    "incompativel_suspensao": "Incompatível com Suspensão?",
+    "exige_grupo_desoneracao": "Exige Grupo de Desoneração?",
+    "credito_cbs_adquirente": "Crédito de CBS para o Adquirente?",
+    "credito_ibs_adquirente": "Crédito de IBS para o Adquirente?",
+    "credito_presumido_fornecedor": "Crédito Presumido para o Fornecedor?",
+    "credito_presumido_adquirente": "Crédito Presumido para o Adquirente?",
+    "credito_operacao_antecedente": "Crédito da Operação Antecedente",
+    "dfes_relacionados": "Documentos Fiscais Eletrônicos Relacionados",
     "data_atualizacao": "Atualizado em",
     "descricao": "Descrição",
 }
@@ -105,7 +105,7 @@ def show_cclasstrib_resumo(df: pd.DataFrame) -> None:
         tabela[["codigo", "cst", "descricao", "Redução"]],
         column_config={
             "cClassTrib": st.column_config.TextColumn(width="small"),
-            "CST": st.column_config.TextColumn(width="small"),
+            "Código de Situação Tributária (CST)": st.column_config.TextColumn(width="small"),
             "Descrição": st.column_config.TextColumn(width="large"),
             "Redução": st.column_config.TextColumn(width="medium"),
         },
@@ -118,7 +118,7 @@ def show_cclasstrib_cartao(row: pd.Series) -> None:
     Não repete código/descrição: quem chama já mostrou isso no expander
     ou no seletor.
     """
-    st.caption(f"CST {row['cst']} · {row['cst_descricao']}")
+    st.caption(f"Código de Situação Tributária {row['cst']} · {row['cst_descricao']}")
 
     st.write(f"**Tipo de alíquota:** {row['tipo_aliquota']}")
     st.write(f"**Aplicável a:** {row['nomenclatura']}")
@@ -138,7 +138,7 @@ def show_cclasstrib_cartao(row: pd.Series) -> None:
     if row["credito_operacao_antecedente"]:
         st.caption(f"Crédito da operação antecedente: {row['credito_operacao_antecedente']}")
 
-    st.write(f"**DFes relacionados:** {row['dfes_relacionados'] or '—'}")
+    st.write(f"**Documentos fiscais eletrônicos relacionados:** {row['dfes_relacionados'] or '—'}")
 
     if row["incompativel_suspensao"]:
         st.caption("⚠️ Incompatível com regime de suspensão.")
@@ -175,17 +175,17 @@ def selecionar_com_detalhe(
 
 def _detalhe_indop(linha: pd.Series) -> None:
     st.write(f"**Característica do fornecimento:** {linha['caracteristica_fornecimento']}")
-    st.write(f"**Local do fornecimento (DFe):** {linha['local_fornecimento_dfe']}")
+    st.write(f"**Local do fornecimento no documento fiscal eletrônico:** {linha['local_fornecimento_dfe']}")
     st.write(f"**Dispositivo legal:** {linha['dispositivo_legal']}")
     if linha.get("observacao"):
         st.caption(f"Observação: {linha['observacao']}")
 
 
 def _detalhe_issqn(linha: pd.Series) -> None:
-    st.write(f"**Incidência ET:** {linha['incidencia_et']}")
-    st.write(f"**Incidência EDEmit:** {linha['incidencia_edemit']}")
-    st.write(f"**Obrigatório Obra/AtvEvento:** {linha['obrigatorio_obra_atvevento']}")
-    st.write(f"**Obrigatório InfoComplem:** {linha['obrigatorio_infocomplem']}")
+    st.write(f"**Estabelecimento do Tomador:** {linha['incidencia_et']}")
+    st.write(f"**Estabelecimento do Emitente:** {linha['incidencia_edemit']}")
+    st.write(f"**Obrigatório: Grupo Obra/Atividade de Evento?** {linha['obrigatorio_obra_atvevento']}")
+    st.write(f"**Obrigatório: Informações Complementares?** {linha['obrigatorio_infocomplem']}")
 
 
 st.subheader("Qual serviço você presta?")
@@ -288,7 +288,7 @@ with tab_nbs:
             column_config={
                 "NBS": st.column_config.TextColumn(width="small"),
                 "Descrição NBS": st.column_config.TextColumn(width="large"),
-                "Item LC116": st.column_config.TextColumn(width="small"),
+                "Item da LC 116": st.column_config.TextColumn(width="small"),
                 "cClassTrib": st.column_config.TextColumn(width="small"),
             },
         )
@@ -364,7 +364,7 @@ with tab_cclasstrib:
                     "item_lc116", "descricao_item", "nbs", "cclasstrib",
                 ]].drop_duplicates(),
                 column_config={
-                    "Item LC116": st.column_config.TextColumn(width="small"),
+                    "Item da LC 116": st.column_config.TextColumn(width="small"),
                     "Descrição do Item": st.column_config.TextColumn(width="large"),
                     "NBS": st.column_config.TextColumn(width="small"),
                     "cClassTrib": st.column_config.TextColumn(width="small"),
@@ -400,8 +400,8 @@ with tab_issqn:
         column_config={
             "Código de Tributação Nacional": st.column_config.TextColumn(width="small"),
             "Descrição do Serviço": st.column_config.TextColumn(width="large"),
-            "Incidência EP": st.column_config.TextColumn(width="small"),
-            "Incidência LP": st.column_config.TextColumn(width="small"),
+            "Estabelecimento do Prestador": st.column_config.TextColumn(width="medium"),
+            "Local da Prestação": st.column_config.TextColumn(width="medium"),
         },
     )
 
