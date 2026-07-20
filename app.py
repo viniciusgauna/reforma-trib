@@ -412,3 +412,9 @@ with tab_issqn:
         "Ver incidências completas de qual subitem?", _detalhe_issqn,
     )
 
+st.divider()
+st.caption(
+    "Feito por um consultor de SAP MM, com apoio do Claude Code. "
+    "Dúvidas, sugestões ou erro encontrado: [LinkedIn](https://www.linkedin.com/in/vgsnts/)."
+)
+
